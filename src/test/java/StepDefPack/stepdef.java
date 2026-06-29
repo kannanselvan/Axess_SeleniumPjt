@@ -1,35 +1,37 @@
 package StepDefPack;
 
-
 import UtilsPack.ExcelManager;
 import UtilsPack.ExcelReaderClass;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import junit.framework.TestCase;
-
 
 import java.util.Map;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class stepdef {
-    private static String stepdef;
-    public static Logger log = LogManager.getLogManager().getLogger(stepdef);
 
+    private static final Logger log = Logger.getLogger(stepdef.class.getName());
 
-    @Given("User data{string}")
-    public void userData(String Testcase) {
-        Map<String, String>data = ExcelReaderClass.getData("src/test/resources/testdata.xlsx","Sheet1",Testcase);
+    @Given("User data {string}")
+    public void userData(String testCase) {
+
+        Map<String, String> data = ExcelReaderClass.getData(
+                "src/test/resources/testdata.xlsx",
+                "Sheet1",
+                testCase
+        );
 
         System.out.println(data);
         ExcelManager.setTestdata(data);
-        throw new PendingException();
+
+        log.info("Test data loaded successfully for: " + testCase);
     }
 
     @When("user details")
     public void userDetails() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+        log.info("Executing user details step");
+
+        // Add your logic here
     }
 }
